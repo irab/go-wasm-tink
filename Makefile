@@ -1,7 +1,7 @@
 LDFLAGS =
 GO = $(shell which go)
 GORUN = $(GO) run $(LDFLAGS)
-APP_PORT=8080
+APP_PORT=8081
 
 
 help : Makefile
@@ -12,7 +12,9 @@ help : Makefile
 
 ## build: build the app binary
 build:
-	GOOS=js GOARCH=wasm go build -o ../main.wasm ./app
+	cd app
+	GOOS=js GOARCH=wasm go build -o main.wasm ./app
+	cd ..
 	cp "$(shell go env GOROOT)/misc/wasm/wasm_exec.js" .
 
 ## run: only start application server.
